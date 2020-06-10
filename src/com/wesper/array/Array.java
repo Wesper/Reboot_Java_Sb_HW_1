@@ -1,7 +1,5 @@
 package com.wesper.array;
 
-import java.util.Arrays;
-
 public class Array {
 
     private int[] arr;
@@ -11,7 +9,7 @@ public class Array {
     }
 
     public void addElem(int elem) {
-        int[] newArr = Arrays.copyOfRange(this.arr, 0, arr.length + 1);
+        int[] newArr = copyArrayRange(this.arr, 0, arr.length + 1);
         newArr[newArr.length - 1] = elem;
         this.arr = newArr;
     }
@@ -84,7 +82,7 @@ public class Array {
 
     public int[] sortAscending() {
         int tmp, min;
-        int[] newArr = Arrays.copyOf(this.arr, this.arr.length);
+        int[] newArr = copyArray(this.arr);
         for (int i = 0; i < newArr.length - 1; i++) {
             min = i;
             for (int j = i + 1; j < newArr.length; j++) {
@@ -101,7 +99,7 @@ public class Array {
 
     public int[] sortDescending() {
         int tmp, max;
-        int[] newArr = Arrays.copyOf(this.arr, this.arr.length);
+        int[] newArr = copyArray(this.arr);
         for (int i = 0; i < newArr.length - 1; i++) {
             max = i;
             for (int j = i + 1; j < newArr.length; j++) {
@@ -112,6 +110,22 @@ public class Array {
             tmp = newArr[max];
             newArr[max] = newArr[i];
             newArr[i] = tmp;
+        }
+        return newArr;
+    }
+
+    public int[] copyArray(int[] arr) {
+        int[] newArr = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            newArr[i] = arr[i];
+        }
+        return newArr;
+    }
+
+    public int[] copyArrayRange(int[] arr, int from, int to) {
+        int[] newArr = new int[to - from];
+        for (int i = from; i < arr.length; i++) {
+            newArr[i] = arr[i];
         }
         return newArr;
     }
