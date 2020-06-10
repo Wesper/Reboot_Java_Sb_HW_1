@@ -115,7 +115,7 @@ public class Statistics {
         for (int i = 0; i < cars.length-1;i++) {
             min = i;
             for (int j = i + 1; j < cars.length; j++) {
-                if (cars[j].getMileage() < cars[i].getMileage())
+                if (cars[j].getMileage() < cars[min].getMileage())
                     min = j;
             }
             tmp = cars[min];
@@ -135,7 +135,7 @@ public class Statistics {
         for (int i = 0; i < cars.length-1;i++) {
             min = i;
             for (int j = i + 1; j < cars.length; j++) {
-                if (cars[j].getOther() < cars[i].getOther())
+                if (cars[j].getOther() < cars[min].getOther())
                     min = j;
             }
             tmp = cars[min];
