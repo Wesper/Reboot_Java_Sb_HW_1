@@ -47,7 +47,7 @@ public class LinkedList {
         }
 
         //Если позиция за рамками длины списка + 1, выходим с текстом ошибки
-        if (!(position <= length() + 1 && position > 0)) {
+        if (!indexValidation(position)) {
             System.out.println("Некорректный индекс");
             return;
         }
@@ -107,17 +107,7 @@ public class LinkedList {
      * @return выводит в консоль длину списка
      */
     public void printLength() {
-        ListElement el = head;
-        int i = 1;
-        if (head == null) {
-            System.out.println(0);
-            return;
-        }
-        while (el.next != null) {
-            el = el.next;
-            i++;
-        }
-        System.out.println(i);
+        System.out.println(length());
     }
 
     /**
@@ -129,7 +119,7 @@ public class LinkedList {
         int i = 1;
 
         //Если позиция за рамками длины списка или список пуст, выходим с текстом ошибки
-        if (!(position <= length() && position > 0) || (tmp == null)) {
+        if (!indexValidation(position)) {
             System.out.println("Некорректный индекс");
             return;
         }
@@ -187,7 +177,7 @@ public class LinkedList {
         int i = 1;
 
         //Если позиция за рамками длины списка или список пуст, выходим с текстом ошибки
-        if (!(position <= length() && position > 0) || (tmp == null)) {
+        if (!indexValidation(position)) {
             System.out.println("Некорректный индекс");
             return;
         }
@@ -277,6 +267,19 @@ public class LinkedList {
                 el2 = el2.next;
                 printLinkedList();
             }
+        }
+    }
+
+    /**
+     * Проверка корректности переданной позиции
+     * @param position - позиция элемента в списке
+     * @return true - если позиция корректная, false - если нет
+     */
+    public boolean indexValidation(int position) {
+        if (position > length() + 1 || position < 0) {
+            return false;
+        } else {
+            return true;
         }
     }
 }
