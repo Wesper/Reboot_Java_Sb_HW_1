@@ -3,7 +3,7 @@ package com.wesper.calculator;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(BaseOperations.addition(1, 2));
+/*        System.out.println(BaseOperations.addition(1, 2));
         System.out.println(BaseOperations.addition(0, 2));
         System.out.println(BaseOperations.addition(5, 0));
         System.out.println(BaseOperations.addition(0, 0));
@@ -72,7 +72,14 @@ public class Main {
         System.out.println(ComplexOperations.pow(2, -1));
         System.out.println(ComplexOperations.pow(2, -10));
         System.out.println(ComplexOperations.pow(3.33, -4));
-        System.out.println(ComplexOperations.pow(3.33, 10));
+        System.out.println(ComplexOperations.pow(3.33, 10));*/
 
+
+        String str = "- 234 + 3 + ( - 21 - 2  ) * -21 - - 1 +-0";
+        CalculateRpnExpression calculateRpnExpression = new CalculateRpnExpression();
+//        String str = "(6+10-4)/(1+1*2)+1";
+        String rslt;
+        rslt = calculateRpnExpression.evaluateExpression(str);
+        System.out.println(rslt);
     }
 }

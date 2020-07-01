@@ -1,7 +1,5 @@
 package com.wesper.linkedList;
 
-import com.wesper.gsm.Car;
-
 public class LinkedList {
 
     private ListElement head;
