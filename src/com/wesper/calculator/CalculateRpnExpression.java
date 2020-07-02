@@ -12,11 +12,12 @@ public class CalculateRpnExpression {
                 .replace("--", "+")
                 .replace("+-", "-")
                 .replace("-+", "-")
-                .replace("++", "+");
+                .replace("++", "+")
+                .replace("-(", "-1*(");
 
         String[] simpleSplit = data.split("");
 
-        if (simpleSplit[0].equals("-")) {
+        if (simpleSplit[0].equals("-") && simpleSplit[1].matches("\\d+")) {
             simpleSplit[0] = "±";
         }
 
@@ -31,8 +32,8 @@ public class CalculateRpnExpression {
         String tmp = "";
 
         for (int i = 0; i < simpleSplit.length; i++) {
-            if (simpleSplit[i].matches("\\d+")) {
-                tmp = tmp + simpleSplit[i];
+            if (simpleSplit[i].matches("\\d+") || simpleSplit[i].equals("±")) {
+                tmp = tmp + simpleSplit[i].replace("±", "-");
             } else {
                 if ((tmp != "")) {
                     splitByElements = addToStack(splitByElements, tmp);
@@ -44,7 +45,11 @@ public class CalculateRpnExpression {
                 }
             }
         }
-        splitByElements = addToStack(splitByElements, tmp);
+        if (tmp != "") {
+            splitByElements = addToStack(splitByElements, tmp);
+        }
+
+
 
         return splitByElements;
     }
@@ -56,9 +61,9 @@ public class CalculateRpnExpression {
     private String[] convertToRpn(String[] data) {
         String[] rpn = new String[0];
         String[] stack = new String[0];
-
+//((4/2)+1)
         for (int i = 0; i < data.length; i++) {
-            if (data[i].matches("\\d+") || data[i].equals("±")) {
+            if (data[i].matches("-{0,1}\\d+")) {
                 rpn = addToStack(rpn, data[i]);
             } else {
                 if (data[i].equals(")")) {
@@ -197,7 +202,7 @@ public class CalculateRpnExpression {
      * Добавляет в ОПН массив все элементы из стека, с их удалением из стэка
      */
     private String[] fromStackAll(String[] rpn, String[] stack) {
-        for (int i = stack.length - 1; i <= 0; i++) {
+        for (int i = stack.length - 1; i >= 0; i--) {
             rpn = addToStack(rpn, stack[i]);
         }
         return rpn;
@@ -213,7 +218,7 @@ public class CalculateRpnExpression {
         String[] result = new String[0];
 
         for (int i = 0; i < data.length; i++) {
-            if (data[i].matches("\\d+")) {
+            if (data[i].matches("-{0,1}\\d+")) {
                 result = addToStack(result, data[i]);
             } else {
                 result = calculate(result, data[i]);

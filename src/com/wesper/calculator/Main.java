@@ -78,6 +78,11 @@ public class Main {
         String str = "- 234 + 3 + ( - 21 - 2  ) * -21 - - 1 +-0";
         CalculateRpnExpression calculateRpnExpression = new CalculateRpnExpression();
 //        String str = "(6+10-4)/(1+1*2)+1";
+//        String str = "((4/2)+1)";
+//        String str = "(4/(2-1))+1";
+//        String str = "-((4/(2-1))+1)";
+//        String str = "-(-(4/(2-1))+1)";
+//        String str = "-(1 - (4/(2-1))+1)";
         String rslt;
         rslt = calculateRpnExpression.evaluateExpression(str);
         System.out.println(rslt);
