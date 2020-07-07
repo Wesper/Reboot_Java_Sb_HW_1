@@ -1,8 +1,8 @@
 package com.wesper.calculator;
 
-public class ComplexOperations {
+public class ComplexOperationsImpl implements ComplexOperationApi{
 
-    public static double sqrt(int number) {
+    public double sqrt(int number) {
         double res = 1;
         double tmp = 0;
 
@@ -23,7 +23,7 @@ public class ComplexOperations {
         return res;
     }
 
-    public static double sqrt(double number) {
+    public double sqrt(double number) {
         double res = 1;
         double tmp = 0;
 
@@ -44,7 +44,7 @@ public class ComplexOperations {
         return res;
     }
 
-    public static double pow(int number, int power) {
+    public double pow(int number, int power) {
         double res = 1;
 
         if (number == 0) {
@@ -68,7 +68,7 @@ public class ComplexOperations {
         return res;
     }
 
-    public static double pow(double number, int power) {
+    public double pow(double number, int power) {
         double res = 1;
 
         if (number == 0) {
