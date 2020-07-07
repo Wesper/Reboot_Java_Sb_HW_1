@@ -2,10 +2,16 @@ package com.wesper.gsmInterfaces.print;
 
 import com.wesper.gsmInterfaces.cars.Cars;
 
+import java.net.UnknownHostException;
+import java.util.Date;
+import java.net.InetAddress;
+
+import static java.lang.System.getenv;
+
 public class PrintInfo implements Print{
     @Override
     public void printInfo(Cars cars) {
-        System.out.println("##########");
+        serviceInformation();
         System.out.println("Автомобиль " + cars.getCodeCar());
         System.out.println("Гос. номер " + cars.getNumber());
         System.out.println("Пробег в км " + cars.getMileage());
@@ -16,7 +22,7 @@ public class PrintInfo implements Print{
 
     @Override
     public void printInfo(Cars[] cars) {
-        System.out.println("##########");
+        serviceInformation();
         for (Cars cars1 : cars) {
             System.out.println("Автомобиль " + cars1.getCodeCar());
             System.out.println("Гос. номер " + cars1.getNumber());
@@ -30,7 +36,7 @@ public class PrintInfo implements Print{
 
     @Override
     public void printInfo(String str, Cars cars) {
-        System.out.println("##########");
+        serviceInformation();
         System.out.println(str);
         System.out.println("Автомобиль " + cars.getCodeCar());
         System.out.println("Гос. номер " + cars.getNumber());
@@ -42,7 +48,7 @@ public class PrintInfo implements Print{
 
     @Override
     public void printInfo(String str, Cars[] cars) {
-        System.out.println("##########");
+        serviceInformation();
         System.out.println(str);
         for (Cars cars1 : cars) {
             System.out.println("Автомобиль " + cars1.getCodeCar());
@@ -57,15 +63,27 @@ public class PrintInfo implements Print{
 
     @Override
     public void printInfo(String str, double value) {
-        System.out.println("##########");
+        serviceInformation();
         System.out.println(str);
         System.out.println(value);
     }
 
     @Override
     public void printInfo(String str, int value) {
-        System.out.println("##########");
+        serviceInformation();
         System.out.println(str);
         System.out.println(value);
+    }
+
+    private void serviceInformation() {
+        Date date = new Date();
+        String userName = getenv("USER");
+        String inetAddress;
+        try {
+            inetAddress = InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            inetAddress = "Хост не определен";
+        }
+        System.out.println(date.toString() + " " + userName + " " + inetAddress);
     }
 }
