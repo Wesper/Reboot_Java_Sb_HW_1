@@ -6,62 +6,55 @@ import com.wesper.gsmInterfaces.cars.*;
 
 public class FabricCar implements Fabric{
 
-    CalcFuelConsumption calcFuelConsumption;
-    CalcFuelCost calcFuelCost;
+    CalcFuelCost[] calcFuelCosts = new CalcFuelCost[4];
+    CalcFuelConsumption[] calcFuelConsumptions = new CalcFuelConsumption[4];
+
+    public void init() {
+        this.calcFuelConsumptions[0] = new CalcFuelConsumptionForCar();
+        this.calcFuelConsumptions[1] = new CalcFuelConsumptionForTruck();
+        this.calcFuelConsumptions[2] = new CalcFuelConsumptionForPassenger();
+        this.calcFuelConsumptions[3] = new CalcFuelConsumptionForHeavyCar();
+        this.calcFuelCosts[0] = new CalcFuelCostForCar();
+        this.calcFuelCosts[1] = new CalcFuelCostForTruck();
+        this.calcFuelCosts[2] = new CalcFuelCostForPassenger();
+        this.calcFuelCosts[3] = new CalcFuelCostForHeavyCar();
+    }
 
     @Override
     public Cars createCar(int codeCar, int number, int mileage, int other) {
         Cars car;
-        double fuelConsumption;
+        double fuelConsumption = 0.0;
 
         switch (codeCar) {
             case 100 :
                 car = new Car(codeCar, number, mileage, other);
-                this.calcFuelConsumption = new CalcFuelConsumptionForCar();
-                this.calcFuelCost = new CalcFuelCostForCar();
-                fuelConsumption = calcFuelConsumption(mileage);
+                fuelConsumption = this.calcFuelConsumptions[0].calcFuelConsumption(mileage);
                 car.setFuelConsumption(fuelConsumption);
-                car.setFuelCost(calcFuelCost(fuelConsumption));
+                car.setFuelCost(this.calcFuelCosts[0].calcFuelCost(fuelConsumption));
                 break;
             case 200 :
                 car = new Truck(codeCar, number, mileage, other);
-                this.calcFuelConsumption = new CalcFuelConsumptionForTruck();
-                this.calcFuelCost = new CalcFuelCostForTruck();
-                fuelConsumption = calcFuelConsumption(mileage);
+                fuelConsumption = this.calcFuelConsumptions[1].calcFuelConsumption(mileage);
                 car.setFuelConsumption(fuelConsumption);
-                car.setFuelCost(calcFuelCost(fuelConsumption));
+                car.setFuelCost(this.calcFuelCosts[1].calcFuelCost(fuelConsumption));
                 break;
             case 300 :
                 car = new Passenger(codeCar, number, mileage, other);
-                this.calcFuelConsumption = new CalcFuelConsumptionForPassenger();
-                this.calcFuelCost = new CalcFuelCostForPassenger();
-                fuelConsumption = calcFuelConsumption(mileage);
+                fuelConsumption = this.calcFuelConsumptions[2].calcFuelConsumption(mileage);
                 car.setFuelConsumption(fuelConsumption);
-                car.setFuelCost(calcFuelCost(fuelConsumption));
+                car.setFuelCost(this.calcFuelCosts[2].calcFuelCost(fuelConsumption));
                 break;
             case 400 :
                 car = new HeavyCar(codeCar, number, mileage, other);
-                this.calcFuelConsumption = new CalcFuelConsumptionForHeavyCar();
-                this.calcFuelCost = new CalcFuelCostForHeavyCar();
-                fuelConsumption = calcFuelConsumption(mileage);
+                fuelConsumption = this.calcFuelConsumptions[3].calcFuelConsumption(mileage);
                 car.setFuelConsumption(fuelConsumption);
-                car.setFuelCost(calcFuelCost(fuelConsumption));
+                car.setFuelCost(this.calcFuelCosts[3].calcFuelCost(fuelConsumption));
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + codeCar);
         }
 
         return car;
-    }
-
-    @Override
-    public double calcFuelConsumption(int mileage) {
-        return calcFuelConsumption.calcFuelConsumption(mileage);
-    }
-
-    @Override
-    public double calcFuelCost(double fuelConsumption) {
-        return calcFuelCost.calcFuelCost(fuelConsumption);
     }
 
 }

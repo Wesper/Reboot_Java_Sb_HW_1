@@ -9,6 +9,7 @@ public class ParserCars implements Parser {
         int i = 0;
         Cars[] cars = new Cars[input.length];
         FabricCar fabricCar = new FabricCar();
+        fabricCar.init();
         for (String str : input) {
             String[] splited = str.split("\\D");
             int codeCar = Integer.parseInt(splited[1]);

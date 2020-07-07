@@ -6,8 +6,4 @@ public interface Fabric {
 
     Cars createCar(int codeCar, int number, int mileage, int other);
 
-    double calcFuelConsumption(int mileage);
-
-    double calcFuelCost(double fuelConsumption);
-
 }
